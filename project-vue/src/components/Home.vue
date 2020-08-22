@@ -1,17 +1,23 @@
 <template>
+<body id="post">
  <div>
- <nav-menu></nav-menu>
+ <navmenu></navmenu>
  <router-view/>
  </div>
+</body>
 </template>
 
 <script>
-import NavMenu from './common/NavMenu'
+import navmenu from './common/NavMenu'
+
 export default {
   name: 'Home',
-  component: {NavMenu}
+  components: {navmenu}
 }
 </script>
 
 <style scoped>
+#post{
+  background-color: yellow;
+}
 </style>

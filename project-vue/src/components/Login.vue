@@ -1,11 +1,4 @@
 <template>
-  <!-- <el-card>
-    用户名:<input type="text" v-model="loginForm.username" placeholder="请输入用户名"/>
-    <br><br>
-    密码： <input type="password" v-model="loginForm.password" placeholder="请输入密码"/>
-    <br><br>
-    <button v-on:click="login">登录</button>
-  </el-card> -->
 <body id="poster">
   <el-form :model="loginForm" class="login-container" label-position="left" label-width="0px">
     <h3 class="login_title">系统登录</h3>
@@ -42,8 +35,8 @@ export default {
   },
   methods: {
     login() {
-      var _this = this
-      console.log(this.$store.state)
+      // var _this = this
+      // console.log(this.$store.state)
       this.$axios
         .post('/login', {
           username: this.loginForm.username,
@@ -51,10 +44,10 @@ export default {
         })
         .then(successResponse => {
           if (successResponse.data.code === 200) {
-            _this.$store.commit('login', _this.loginForm)
-            var path = this.$route.query.redirect
-            // this.$router.replace({path: '/index'})
-            this.$router.replace({path: path === '/' || path === undefined ? '/index' : path})
+            // _this.$store.commit('login', _this.loginForm)
+            // var path = this.$route.query.redirect
+            this.$router.replace({path: '/index'})
+            // this.$router.replace({path: path === '/' || path === undefined ? '/index' : path})
           } else {
             alert('密码或用户名错误！！！')
           }

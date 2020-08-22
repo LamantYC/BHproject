@@ -1,8 +1,6 @@
 <template>
-  <div>
-    Hello Vue!
-  </div>
-
+<body id="post">
+</body>
 </template>
 
 <script>
@@ -12,5 +10,7 @@ export default {
 </script>
 
 <style scoped>
-
+ #post{
+   background-color: yellow;
+ }
 </style>

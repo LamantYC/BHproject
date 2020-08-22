@@ -3,24 +3,23 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
-import ElementUI from 'element-ui'
-import 'element-ui/lib/theme-chalk/index.css'
-import store from './store'
-Vue.use(ElementUI)
-router.beforeEach((to, from, next) => {
-  if (to.meta.requireAuth) {
-    if (store.state.user.username) {
-      next()
-    } else {
-      next({
-        path: 'login',
-        query: {redirect: to.fullPath}
-      })
-    }
-  } else {
-    next()
-  }
-})
+import ElementUI from 'element-ui' // element-ui的全部组件
+import 'element-ui/lib/theme-chalk/index.css'// element-ui的css
+Vue.use(ElementUI) // 使用elementUI
+// router.beforeEach((to, from, next) => {
+//   if (to.meta.requireAuth) {
+//     if (store.state.user.username) {
+//       next()
+//     } else {
+//       next({
+//         path: 'login',
+//         query: {redirect: to.fullPath}
+//       })
+//     }
+//   } else {
+//     next()
+//   }
+// })
 
 // 设置反向代理
 var axios = require('axios')
@@ -33,9 +32,9 @@ Vue.config.productionTip = false
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
-  render: h => h(App),
+  // render: h => h(App),
   router,
-  store,
+  // store,
   components: {App},
   template: '<App/>'
 })

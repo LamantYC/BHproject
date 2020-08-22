@@ -1,46 +1,40 @@
 <template>
-<div id="app">
-    <el-menu
-    :default-active="'/index'"
-    router
-    class="el-menu-demo"
-    mode="horizontal"
-    @select="handleSelect"
-    background-color="#545c64"
-    text-color="#fff"
-    active-text-color="#ffd04b">
-    <el-menu-item index="1">首页</el-menu-item>
-    <el-submenu index="2">
-        <template slot="title">笔记本</template>
-        <el-menu-item index="2-1">ASUS</el-menu-item>
-        <el-menu-item index="2-2">MacBook</el-menu-item>
-        <el-menu-item index="2-3">Redmi</el-menu-item>
-    </el-submenu>
-    <el-submenu index="3">
-        <template slot="title">图书馆</template>
-        <el-menu-item index="3-1">Java</el-menu-item>
-        <el-menu-item index="3-2">MySQL</el-menu-item>
-        <el-menu-item index="3-3">Python</el-menu-item>
-        <el-menu-item index="4">个人中心</el-menu-item>
-    </el-submenu>
-    <span style="position: absolute;padding-top: 20px;right: 43%;font-size: 20px;font-weight: bold">
+ <el-menu
+ :default-active="'/index'"
+ router
+ mode="horizontal"
+ background-color="white"
+ text-color="#222"
+ active-text-color="red"
+ style="min-width: 1300px">
+ <el-menu-item v-for="(item,i) in navList" :key="i" :index="item.name">
+ {{ item.navItem }}
+ </el-menu-item>
+ <a href="#nowhere" style="color: #222;float: right;padding: 20px;">更多功能</a>
+ <i class="el-icon-menu" style="float:right;font-size: 45px;color: #222;padding-top: 8px"></i>
+ <span style="position: absolute;padding-top: 20px;right: 43%;font-size: 20px;font-weight: bold">
 北海软件工程有限公司</span>
-    </el-menu>
-</div>
+ </el-menu>
 </template>
-
 <script>
 export default {
   name: 'NavMenu',
-  data() {
+  data () {
     return {
-      activeIndex: '1'
+      navList: [
+        {name: '/index', navItem: '首页'},
+        {name: '/jotter', navItem: '笔记本'},
+        {name: '/library', navItem: '图书馆'},
+        {name: '/admin', navItem: '个人中心'}
+      ]
     }
-  },
-  methods: {
-    handleSelect(key, keyPath) {
-      console.log(key, keyPath)
-    }
-  }
-}
+  } }
 </script>
+<style scoped>
+ a{
+ text-decoration: none;
+ }
+ span {
+ pointer-events: none;
+ }
+</style>
