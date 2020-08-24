@@ -2,6 +2,7 @@
 <body id="post">
  <div>
  <navmenu></navmenu>
+   <H1>北海软件</H1>
  <router-view/>
  </div>
 </body>
@@ -19,5 +20,6 @@ export default {
 <style scoped>
 #post{
   background-color: yellow;
+  height: 1000px;
 }
 </style>
