@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.util.HtmlUtils;
 
 import javax.servlet.http.HttpSession;
-import java.util.Objects;
 /**
  * @author 17331
  */
@@ -27,24 +26,31 @@ public class LoginController {
         //转义 html 标签，防止 xss 攻击
         String username = requestUser.getUsername();
         username = HtmlUtils.htmlEscape(username);
-//        if (!Objects.equals("admin", username) ||
-//                !Objects.equals("123456", requestUser.getPassword())) {
-//            String message = "账号密码错误";
-//            System.out.println(message);
-//            return new Result(400);
-//        } else {
-//            System.out.println("登陆成功");
-//            return new Result(200);
-//        }
+        System.out.println(username);
         User user = userService.get(username,requestUser.getPassword());
         if (null == user){
-            System.out.println("登陆失败");
             return new Result(400);
         }else {
             session.setAttribute("user",user);
-            System.out.println("登陆成功");
             return new Result(200);
         }
     }
 
-}
+    /**用户不存在则增加一条记录新增用户*/
+//    @CrossOrigin
+//    @PostMapping("/api/addUser")
+//    @ResponseBody
+//    public Result addUser(@RequestBody User requestUser) {
+//        String username = requestUser.getUsername();
+//        String password = requestUser.getPassword();
+//        String phone = requestUser.getPhone();
+//        String realname = requestUser.getRealname();
+//        String email = requestUser.getEmail();
+//        User user = userService.getUser(username);
+//        if (user == null) {
+//            userService.addUser(username, password, email, phone, realname);//用户不存 在则出入一条记录
+//            return new Result(200);//返回自定义 result 对象
+//            }
+//        return new Result(400);
+//        }
+    }

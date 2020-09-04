@@ -5,6 +5,7 @@ import App from './App'
 import router from './router'
 import ElementUI from 'element-ui' // element-ui的全部组件
 import 'element-ui/lib/theme-chalk/index.css'// element-ui的css
+import 'element-ui/lib/theme-chalk/display.css'
 Vue.use(ElementUI) // 使用elementUI
 // router.beforeEach((to, from, next) => {
 //   if (to.meta.requireAuth) {

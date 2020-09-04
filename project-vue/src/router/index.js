@@ -19,9 +19,34 @@ export default new Router({
       component: Home,
       redirect: '/index',
       children: [
+        // {
+        //   path: '/',
+        //   name: 'AppIndex',
+        //   redirect: '/index',
+        //   component: AppIndex,
+        //   meta: {
+        //     requireAuth: true
+        //   }
+        // },
         {
           path: '/index',
           name: 'AppIndex',
+          component: AppIndex,
+          meta: {
+            requireAuth: true
+          }
+        },
+        {
+          path: '/editform',
+          name: 'EditForm',
+          component: AppIndex,
+          meta: {
+            requireAuth: true
+          }
+        },
+        {
+          path: '/searchbar',
+          name: 'SearchBar',
           component: AppIndex,
           meta: {
             requireAuth: true
@@ -52,18 +77,5 @@ export default new Router({
       name: 'Change',
       component: Change
     }
-    // {
-    //   path: '/navmenu',
-    //   name: 'NavMenu',
-    //   component: NavMenu
-    // },
-    // {
-    //   path: '/index',
-    //   name: 'AppIndex',
-    //   component: AppIndex,
-    //   meta: {
-    //     requireAuth: true
-    //   }
-    // }
   ]
 })

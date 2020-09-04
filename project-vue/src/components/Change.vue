@@ -1,124 +1,252 @@
 <template>
-  <body id="post">
-  <el-form class="container" label-position="left" label-width="0px">
-  <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="0px" class="demo-ruleForm">
-  <el-form-item prop="username">
-    <el-input v-model="ruleForm.username" placeholder="账号"></el-input>
-  </el-form-item>
-  <el-form-item prop="pass">
-    <el-input type="password" v-model="ruleForm.pass" autocomplete="off" placeholder="密码"></el-input>
-  </el-form-item>
-  <el-form-item prop="checkPass">
-    <el-input type="password" v-model="ruleForm.checkPass" autocomplete="off" placeholder="确认密码"></el-input>
-  </el-form-item>
-  <el-form-item prop="verification">
-    <el-input v-model.number="ruleForm.verification" placeholder="验证码" ></el-input>
-    <el-col :span="4">
-    <el-button round >获取验证码</el-button>
-    </el-col>
-  </el-form-item>
-  <el-form-item>
-    <el-button type="primary" @click="submitForm('ruleForm')">提交</el-button>
-    <el-button @click="resetForm('ruleForm')">重置</el-button>
-  </el-form-item>
-</el-form>
-</el-form>
-  </body>
+  <div>
+    <div class="register-wrapper">
+      <div id="register">
+        <p class="title">账户注册</p>
+        <el-form
+          :model="ruleForm2"
+          status-icon
+          :rules="rules2"
+          ref="ruleForm2"
+          label-width="0"
+          class="demo-ruleForm">
+          <el-form-item prop="user">
+            <el-input v-model="ruleForm2.user"  autocomplete="off" placeholder="请输入用户名"></el-input>
+          </el-form-item>
+          <el-form-item prop="tel">
+            <el-input v-model="ruleForm2.tel" auto-complete="off" placeholder="请输入手机号"></el-input>
+          </el-form-item>
+          <el-form-item prop="smscode" class="code">
+            <el-input v-model="ruleForm2.smscode" placeholder="验证码"></el-input>
+            <el-button type="primary" :disabled='isDisabled' @click="sendCode">{{buttonText}}</el-button>
+          </el-form-item>
+          <el-form-item prop="pass">
+            <el-input type="password" v-model="ruleForm2.pass" auto-complete="off" placeholder="输入密码"></el-input>
+          </el-form-item>
+          <el-form-item prop="checkPass">
+            <el-input type="password" v-model="ruleForm2.checkPass" auto-complete="off" placeholder="确认密码"></el-input>
+          </el-form-item>
+          <el-form-item>
+            <el-button type="primary" @click="submitForm('ruleForm2')" style="width:100%;">注册</el-button>
+            <p class="login" @click="gotoLogin">已有账号？立即登录</p>
+          </el-form-item>
+        </el-form>
+      </div>
+    </div>
+  </div>
 </template>
-
 <script>
 export default {
-  name: 'Change',
+  name: 'change',
   data() {
-    var checkNm = (rule, value, callback) => {
-      if (!value) {
-        return callback(new Error('验证码不能为空'))
+    // <!--验证用户名是否合法-->
+    let validateuser = (rule, value, callback) => {
+      if (value === '') {
+        callback(new Error('请输入用户名'))
+      } else if (!this.checkuser(value)) {
+        callback(new Error('用户名必须以字母开头'))
+      } else {
+        callback()
       }
-      setTimeout(() => {
-        if (!Number.isInteger(value)) {
-          callback(new Error('请输入验证码'))
-        } else {
-          callback()
-        }
-      }, 1000)
     }
-    var validatePass = (rule, value, callback) => {
+    // <!--验证手机号是否合法-->
+    let checkTel = (rule, value, callback) => {
+      if (value === '') {
+        callback(new Error('请输入手机号码'))
+      } else if (!this.checkMobile(value)) {
+        callback(new Error('手机号码不合法'))
+      } else {
+        callback()
+      }
+    }
+    //  <!--验证码是否为空-->
+    let checkSmscode = (rule, value, callback) => {
+      if (value === '') {
+        callback(new Error('请输入手机验证码'))
+      } else {
+        callback()
+      }
+    }
+    // <!--验证密码-->
+    let validatePass = (rule, value, callback) => {
       if (value === '') {
         callback(new Error('请输入密码'))
       } else {
-        if (this.ruleForm.checkPass !== '') {
-          this.$refs.ruleForm.validateField('checkPass')
+        if (this.ruleForm2.checkPass !== '') {
+          this.$refs.ruleForm2.validateField('checkPass')
         }
         callback()
       }
     }
-    var validatePass2 = (rule, value, callback) => {
+    // <!--二次验证密码-->
+    let validatePass2 = (rule, value, callback) => {
       if (value === '') {
         callback(new Error('请再次输入密码'))
-      } else if (value !== this.ruleForm.pass) {
-        callback(new Error('两次输入密码不一致'))
+      } else if (value !== this.ruleForm2.pass) {
+        callback(new Error('两次输入密码不一致!'))
       } else {
         callback()
       }
     }
     return {
-      ruleForm: {
+      ruleForm2: {
+        user: '',
         pass: '',
         checkPass: '',
-        age: ''
+        tel: '',
+        smscode: ''
       },
-      rules: {
-        pass: [
-          { validator: validatePass, trigger: 'blur' }
-        ],
-        checkPass: [
-          { validator: validatePass2, trigger: 'blur' }
-        ],
-        verification: [
-          { validator: checkNm, trigger: 'blur' }
-        ]
-      }
+      rules2: {
+        user: [{validator: validateuser, trigger: 'change'}],
+        pass: [{ validator: validatePass, trigger: 'change' }],
+        checkPass: [{ validator: validatePass2, trigger: 'change' }],
+        tel: [{ validator: checkTel, trigger: 'change' }],
+        smscode: [{ validator: checkSmscode, trigger: 'change' }]
+      },
+      buttonText: '发送验证码',
+      isDisabled: false, // 是否禁止点击发送验证码按钮
+      flag: true
     }
   },
   methods: {
+    // <!--发送验证码-->
+    sendCode () {
+      let tel = this.ruleForm2.tel
+      if (this.checkMobile(tel)) {
+        console.log(tel)
+        let time = 60
+        this.buttonText = '已发送'
+        this.isDisabled = true
+        if (this.flag) {
+          this.flag = false
+          let timer = setInterval(() => {
+            time--
+            this.buttonText = time + ' 秒'
+            if (time === 0) {
+              clearInterval(timer)
+              this.buttonText = '重新获取'
+              this.isDisabled = false
+              this.flag = true
+            }
+          }, 1000)
+        }
+      }
+    },
+    // <!--提交注册-->
     submitForm(formName) {
-      this.$refs[formName].validate((valid) => {
+      this.$refs[formName].validate(valid => {
         if (valid) {
-          alert('submit!')
+          this.$axios
+            .post('/addUser', {
+              user: this.ruleForm2.username,
+              pass: this.ruleForm2.password,
+              email: this.ruleForm2.email,
+              phone: this.ruleForm2.phone,
+              realname: this.ruleForm2.realname})
+          setTimeout(() => {
+            alert('注册成功')
+          }, 200)
         } else {
           console.log('error submit!!')
           return false
         }
       })
     },
-    resetForm(formName) {
-      this.$refs[formName].resetFields()
+    // <!--进入登录页-->
+    gotoLogin() {
+      this.$router.push({path: '/login'})
+    },
+    // 验证用户名
+    checkuser(str) {
+      let re = /^[a-zA-Z0-9_]{3,16}$/
+      if (re.test(str)) {
+        return true
+      } else {
+        return false
+      }
+    },
+    // 验证手机号
+    checkMobile(str) {
+      let re = /^1\d{10}$/
+      if (re.test(str)) {
+        return true
+      } else {
+        return false
+      }
     }
   }
 }
 </script>
 
-<style>
-.container {
-    border-radius: 15px;
-    background-clip: padding-box;
-    margin: 90px auto;
-    width: 350px;
-    padding: 35px 35px 15px 35px;
-    background: #fff;
-    border: 1px solid #eaeaea;
-    box-shadow: 0 0 25px #cac6c6;
-  }
-  #post {
-    /* background:url("../assets/bg.jpg") no-repeat; */
-    background-color: yellow;
-    background-position: center;
-    height: 100%;
-    width: 100%;
-    background-size: cover;
-    position: fixed;
-  }
- body{
-    margin: 0px;
-  }
+<style scoped>
+.loading-wrapper {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  background: #aedff8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.register-wrapper img {
+  position: absolute;
+  z-index: 1;
+}
+.register-wrapper {
+  background-color: yellow;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+}
+#register {
+  max-width: 340px;
+  margin: 60px auto;
+  background: #fff;
+  padding: 20px 40px;
+  border-radius: 10px;
+  position: relative;
+  z-index: 9;
+}
+.title {
+  font-size: 26px;
+  line-height: 50px;
+  font-weight: bold;
+  margin: 10px;
+  text-align: center;
+}
+.el-form-item {
+  text-align: center;
+}
+.login {
+  margin-top: 10px;
+  font-size: 14px;
+  line-height: 22px;
+  color: #505458;
+  cursor: pointer;
+  text-align: left;
+  text-indent: 8px;
+  width: 160px;
+}
+.login:hover {
+  color: #2c2fd6;
+}
+.code >>> .el-form-item__content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.code button {
+  margin-left: 20px;
+  width: 140px;
+  text-align: center;
+}
+.el-button--primary:focus {
+  background: #409EFF;
+  border-color: #409EFF;
+  color: #fff;
+}
 </style>

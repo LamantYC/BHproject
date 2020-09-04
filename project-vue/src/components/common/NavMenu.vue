@@ -6,14 +6,13 @@
  background-color="white"
  text-color="#222"
  active-text-color="red"
- style="min-width: 1300px">
+ style="min-width: 100%">
  <el-menu-item v-for="(item,i) in navList" :key="i" :index="item.name">
  {{ item.navItem }}
  </el-menu-item>
  <a href="#nowhere" style="color: #222;float: right;padding: 20px;">更多功能</a>
  <i class="el-icon-menu" style="float:right;font-size: 45px;color: #222;padding-top: 8px"></i>
- <span style="position: absolute;padding-top: 20px;right: 43%;font-size: 20px;font-weight: bold">
-北海软件工程有限公司</span>
+ <span style="position: absolute;padding-top: 20px;right: 43%;font-size: 20px;font-weight: bold">北海软件工程有限公司</span>
  </el-menu>
 </template>
 <script>

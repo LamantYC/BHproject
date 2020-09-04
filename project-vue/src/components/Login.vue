@@ -13,7 +13,7 @@
       <br><br>
     <el-form-item>
       <el-button type="primary" style="width:40%;background:#505458;float: left;border:none" v-on:click="login">登录</el-button>
-      <el-button type="primary" style="width:40%;background:#505458;float: right;border:none" v-on:click="login">注册</el-button>
+      <el-button type="primary" style="width:40%;background:#505458;float: right;border:none" v-on:click="sign_in">注册</el-button>
     </el-form-item>
   </el-form>
 </body>
@@ -34,9 +34,10 @@ export default {
     }
   },
   methods: {
+    sign_in() {
+      this.$router.push({path: '/change'})
+    },
     login() {
-      // var _this = this
-      // console.log(this.$store.state)
       this.$axios
         .post('/login', {
           username: this.loginForm.username,
@@ -44,10 +45,7 @@ export default {
         })
         .then(successResponse => {
           if (successResponse.data.code === 200) {
-            // _this.$store.commit('login', _this.loginForm)
-            // var path = this.$route.query.redirect
             this.$router.replace({path: '/index'})
-            // this.$router.replace({path: path === '/' || path === undefined ? '/index' : path})
           } else {
             alert('密码或用户名错误！！！')
           }

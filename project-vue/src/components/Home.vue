@@ -19,5 +19,7 @@ export default {
 <style scoped>
 #post{
   background-color: yellow;
+  width: 100%;
+  height: 2000px;
 }
 </style>
