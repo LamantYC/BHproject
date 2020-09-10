@@ -16,39 +16,12 @@ public class User {
     private int id;
     private String username;
     private String password;
-//    private String status;
-    private String email;
     private String phone;
     private String name;
     private String salt;
-//    private String realname;
-
-//    public String getRealname() {
-//        return realname;
-//    }
-//
-//    public void setRealname(String realname) {
-//        this.realname = realname;
-//    }
 
     public int getId() {
         return id;
-    }
-
-//    public String getStatus() {
-//        return status;
-//    }
-//
-//    public void setStatus(String status) {
-//        this.status = status;
-//    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 
     public String getPhone() {
@@ -95,5 +68,15 @@ public class User {
         this.password = password;
     }
 
-
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", phone='" + phone + '\'' +
+                ", name='" + name + '\'' +
+                ", salt='" + salt + '\'' +
+                '}';
+    }
 }

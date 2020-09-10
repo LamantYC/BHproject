@@ -1,6 +1,8 @@
 <template>
   <div>
-    <i class="el-icon-circle-plus-outline" @click="dialogFormVisible = true"></i>
+    <el-card style="width: 135px;margin-bottom: 20px;height: 260px;margin-right: 15px" class="book" bodyStyle="padding:10px" shadow="hover">
+    <i class="el-icon-circle-plus-outline" style="margin: 50px 0 0 7px" @click="dialogFormVisible = true"></i>
+    </el-card>
     <el-dialog title="添加/修改图书" :visible.sync="dialogFormVisible" @close="clear">
     <el-form v-model="form" style="text-align: left" ref="dataForm">
     <el-form-item label="书名" :label-width="formLabelWidth" prop="title">

@@ -10,18 +10,18 @@
           ref="ruleForm2"
           label-width="0"
           class="demo-ruleForm">
-          <el-form-item prop="user">
-            <el-input v-model="ruleForm2.user"  autocomplete="off" placeholder="请输入用户名"></el-input>
+          <el-form-item prop="username">
+            <el-input v-model="ruleForm2.username"  autocomplete="off" placeholder="请输入用户名"></el-input>
           </el-form-item>
-          <el-form-item prop="tel">
-            <el-input v-model="ruleForm2.tel" auto-complete="off" placeholder="请输入手机号"></el-input>
+          <el-form-item prop="phone">
+            <el-input v-model="ruleForm2.phone" auto-complete="off" placeholder="请输入手机号"></el-input>
           </el-form-item>
           <el-form-item prop="smscode" class="code">
             <el-input v-model="ruleForm2.smscode" placeholder="验证码"></el-input>
             <el-button type="primary" :disabled='isDisabled' @click="sendCode">{{buttonText}}</el-button>
           </el-form-item>
-          <el-form-item prop="pass">
-            <el-input type="password" v-model="ruleForm2.pass" auto-complete="off" placeholder="输入密码"></el-input>
+          <el-form-item prop="password">
+            <el-input type="password" v-model="ruleForm2.password" auto-complete="off" placeholder="输入密码"></el-input>
           </el-form-item>
           <el-form-item prop="checkPass">
             <el-input type="password" v-model="ruleForm2.checkPass" auto-complete="off" placeholder="确认密码"></el-input>
@@ -82,7 +82,7 @@ export default {
     let validatePass2 = (rule, value, callback) => {
       if (value === '') {
         callback(new Error('请再次输入密码'))
-      } else if (value !== this.ruleForm2.pass) {
+      } else if (value !== this.ruleForm2.password) {
         callback(new Error('两次输入密码不一致!'))
       } else {
         callback()
@@ -90,17 +90,17 @@ export default {
     }
     return {
       ruleForm2: {
-        user: '',
-        pass: '',
+        username: '',
+        password: '',
         checkPass: '',
-        tel: '',
+        phone: '',
         smscode: ''
       },
       rules2: {
-        user: [{validator: validateuser, trigger: 'change'}],
-        pass: [{ validator: validatePass, trigger: 'change' }],
+        username: [{validator: validateuser, trigger: 'change'}],
+        password: [{ validator: validatePass, trigger: 'change' }],
         checkPass: [{ validator: validatePass2, trigger: 'change' }],
-        tel: [{ validator: checkTel, trigger: 'change' }],
+        phone: [{ validator: checkTel, trigger: 'change' }],
         smscode: [{ validator: checkSmscode, trigger: 'change' }]
       },
       buttonText: '发送验证码',
@@ -111,9 +111,9 @@ export default {
   methods: {
     // <!--发送验证码-->
     sendCode () {
-      let tel = this.ruleForm2.tel
-      if (this.checkMobile(tel)) {
-        console.log(tel)
+      let phone = this.ruleForm2.phone
+      if (this.checkMobile(phone)) {
+        console.log(phone)
         let time = 60
         this.buttonText = '已发送'
         this.isDisabled = true
@@ -137,14 +137,13 @@ export default {
       this.$refs[formName].validate(valid => {
         if (valid) {
           this.$axios
-            .post('/addUser', {
-              user: this.ruleForm2.username,
-              pass: this.ruleForm2.password,
-              email: this.ruleForm2.email,
-              phone: this.ruleForm2.phone,
-              realname: this.ruleForm2.realname})
+            .post('/adduser', {
+              username: this.ruleForm2.username,
+              password: this.ruleForm2.password,
+              phone: this.ruleForm2.phone})
           setTimeout(() => {
             alert('注册成功')
+            this.$router.replace({path: '/login'})
           }, 200)
         } else {
           console.log('error submit!!')

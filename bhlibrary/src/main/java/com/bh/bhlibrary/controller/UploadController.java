@@ -14,25 +14,24 @@ import java.io.IOException;
 public class UploadController extends HttpServlet {
 //    @Autowired
 //    private UploadService uploadService;
-
-    /**
-     * 本地图片上传
-     */
-
+//
+//    /**
+//     * 本地图片上传
+//     */
+//
 //    @PostMapping("/image")
 //    public ResponseEntity<String> uploadImage(@RequestParam(name = "file")MultipartFile file){
 //        return ResponseEntity.ok(uploadService.uploadIxmage(file));
 //    }
 //
-//
-//    * 获取oss的签名
-//    *
-//    *
+//    /* 获取oss的签名
+//     *
+//     */
 //    @GetMapping("/signature")
 //    public ResponseEntity<Map<String,Object>> signature(){
 //        return ResponseEntity.ok(uploadService.getSignature());
 //    }
-//    }
+
     @PostMapping("/api/covers")
     public String coversUpload(MultipartFile file) {
         String folder = "d:/vue/img1";

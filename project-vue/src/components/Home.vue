@@ -2,7 +2,7 @@
 <body id="post">
  <div>
  <navmenu></navmenu>
-   <H1>北海软件</H1>
+ <sidebar></sidebar>
  <router-view/>
  </div>
 </body>
@@ -10,21 +10,17 @@
 
 <script>
 import navmenu from './common/NavMenu'
-
+import sidebar from './common/sidebar'
 export default {
   name: 'Home',
-  components: {navmenu}
+  components: {navmenu, sidebar}
 }
 </script>
 
 <style scoped>
 #post{
   background-color: yellow;
-<<<<<<< HEAD
   width: 100%;
   height: 2000px;
-=======
-  height: 1000px;
->>>>>>> 664981a4b64553148f6a25410a355a869fe49197
 }
 </style>

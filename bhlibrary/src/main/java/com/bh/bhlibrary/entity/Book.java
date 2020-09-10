@@ -19,15 +19,10 @@ public class Book {
     @ManyToOne
     @JoinColumn(name = "cid")
     private Category category;
-<<<<<<< HEAD
     @JoinColumn(name = "title")
     private String title;
     private String cover;
     @JoinColumn(name = "author")
-=======
-    private String title;
-    private String cover;
->>>>>>> 664981a4b64553148f6a25410a355a869fe49197
     private String author;
     private String date;
     private String press;
