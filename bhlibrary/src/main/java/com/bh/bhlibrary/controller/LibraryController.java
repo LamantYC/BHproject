@@ -1,5 +1,6 @@
 package com.bh.bhlibrary.controller;
 
+<<<<<<< HEAD
 import com.bh.bhlibrary.dao.BookDao;
 import com.bh.bhlibrary.entity.Book;
 import com.bh.bhlibrary.service.BookService;
@@ -20,18 +21,39 @@ public class LibraryController extends HttpServlet {
     private BookService bookService;
     @Autowired
     private BookDao bookDao;
+=======
+import com.bh.bhlibrary.entity.Book;
+import com.bh.bhlibrary.service.BookService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@RestController
+public class LibraryController {
+    @Autowired
+    private BookService bookService;
+>>>>>>> 664981a4b64553148f6a25410a355a869fe49197
 
     @GetMapping("/api/books")
     public List<Book> list() {
         return bookService.list();
     }
+<<<<<<< HEAD
         //图书添加模块
+=======
+
+>>>>>>> 664981a4b64553148f6a25410a355a869fe49197
     @PostMapping("/api/books")
     public Book addOrUpdate(@RequestBody Book book) {
         bookService.addOrUpdate(book);
         return book;
     }
+<<<<<<< HEAD
     //图书删除模块
+=======
+
+>>>>>>> 664981a4b64553148f6a25410a355a869fe49197
     @PostMapping("/api/delete")
     public void delete(@RequestBody Book book) {
         bookService.deleteById(book.getId());
@@ -47,6 +69,7 @@ public class LibraryController extends HttpServlet {
     }
 
 
+<<<<<<< HEAD
     @GetMapping("/api/search")
     public List<Book> searchResult(@RequestParam("keywords") String keywords){
         //关键字为空时查询所有
@@ -75,4 +98,6 @@ public class LibraryController extends HttpServlet {
         map.put("pagesize",pagesize);
         return map;
     }
+=======
+>>>>>>> 664981a4b64553148f6a25410a355a869fe49197
 }

@@ -22,6 +22,9 @@ public class CategoryService {
         Category category = categoryDAO.findById(id).orElse(null);
         return category;
     }
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 664981a4b64553148f6a25410a355a869fe49197
 }

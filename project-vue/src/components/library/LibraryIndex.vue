@@ -1,4 +1,5 @@
 <template>
+<<<<<<< HEAD
   <el-container>
     <!-- <el-aside style="width: 200px;margin-top: 20px"> -->
       <switch></switch>
@@ -8,6 +9,17 @@
       <books class="books-area" ref="booksArea"></books>
     </el-main>
   </el-container>
+=======
+ <el-container>
+ <el-aside style="width: 200px;margin-top: 20px">
+ <switch></switch>
+ <SideMenu></SideMenu>
+ </el-aside>
+ <el-main>
+ <Books class="books-area"></Books>
+ </el-main>
+ </el-container>
+>>>>>>> 664981a4b64553148f6a25410a355a869fe49197
 </template>
 <script>
 import SideMenu from './SideMenu'
